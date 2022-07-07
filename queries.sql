@@ -70,3 +70,61 @@ SELECT owners.full_name FROM animals
 JOIN owners ON animals.owner_id = owners.id GROUP BY owners.full_name
 ORDER BY COUNT(owner_id) DESC
 LIMIT 1;
+
+/*Queries that provide answers to the questions from project P.IV*/
+
+/*1*/
+SELECT animals.name FROM animals
+JOIN visits ON visits.animals_id = animals.id
+JOIN vets ON visits.vet_id = vets.id
+WHERE vets.name = 'William Tatcher' 
+ORDER BY visits.date_of_visit DESC LIMIT 1;
+
+/*2*/
+SELECT COUNT(animals.name) FROM animals
+JOIN visits ON visits.animals_id = animals.id
+JOIN vets ON visits.vet_id = vets.id 
+WHERE vets.name = 'Stephanie Mendez';
+
+/*3*/
+SELECT vets.name, species.name FROM vets
+FULL JOIN specializations ON specializations.vet_id = vets.id
+FULL JOIN species ON species.id = specializations.species_id;
+
+/*4*/
+SELECT animals.name FROM animals
+JOIN visits ON visits.animals_id = animals.id
+JOIN vets ON visits.vet_id = vets.id
+WHERE vets.name = 'Stephanie Mendez' AND visits.date_of_visit BETWEEN '2020-04-01' AND '2020-08-30';
+
+/*5*/
+SELECT animals.name, COUNT(*) FROM animals
+JOIN visits ON visits.animals_id = animals.id
+GROUP BY animals.name ORDER BY COUNT(*) DESC LIMIT 1;
+
+/*6*/
+SELECT animals.name FROM animals
+JOIN visits ON visits.animals_id = animals.id
+JOIN vets ON visits.vet_id = vets.id
+WHERE vets.name = 'Maisy Smith' ORDER BY visits.date_of_visit LIMIT 1;
+
+/*7*/
+SELECT animals.*, vets.*, visits.date_of_visit FROM animals
+JOIN visits ON visits.animals_id = animals.id
+JOIN vets ON visits.vet_id = vets.id ORDER BY visits.date_of_visit DESC LIMIT 1;
+
+/*8*/
+SELECT COUNT(*) FROM visits
+FULL JOIN animals ON animals.id = visits.animals_id
+FULL JOIN vets ON visits.vet_id = vets.id
+FULL JOIN specializations ON specializations.vet_id = vets.id
+WHERE specializations.species_id IS NULL;
+
+/*9*/
+SELECT species.name, COUNT(*) FROM visits
+JOIN animals ON animals.id = visits.animals_id
+JOIN vets ON visits.vet_id = vets.id
+JOIN species ON species.id = animals.species_id
+WHERE vets.name = 'Maisy Smith'
+GROUP BY species.name
+ORDER BY COUNT(*) DESC;
