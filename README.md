@@ -3,6 +3,9 @@ Vet Clinic Database Project
 > This Repository is a Project Database of animals and customers for a Vet Clinic
 
 
+![image](https://user-images.githubusercontent.com/99830261/178556799-38f795dc-848e-4891-9bcc-d7d212a3f462.png)
+
+
 ## Getting Started
 
 This repository includes files with plain SQL that can be used to recreate a database:
